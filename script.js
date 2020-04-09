@@ -22,8 +22,8 @@ const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
-var spelerX = 200; // x-positie van speler
-var spelerY = 100; // y-positie van speler
+var spelerX = 0; // x-positie van speler
+var spelerY = 0; // y-positie van speler
 
 var kogelX = 0;    // x-positie van kogel
 var kogelY = 0;    // y-positie van kogel
@@ -46,7 +46,7 @@ var score = 0; // aantal behaalde punten
  * Tekent het speelveld
  */
 var tekenVeld = function () {
-  fill("purple");
+  fill(135, 206, 235);
   rect(20, 20, width - 2 * 20, height - 2 * 20);
 };
 
@@ -79,8 +79,17 @@ var tekenKogel = function(x, y) {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-  fill("white");
-  ellipse(x, y, 50, 50);
+    var spelerY = 600;
+
+fill(0, 0, 0);
+  triangle(mouseX - 30, spelerY + 15, mouseX, spelerY - 15, mouseX + 30, spelerY + 15);
+    if(mouseX <= 50){
+      mouseX = 50;
+    } else if(mouseX >= 1230){
+          mouseX = 1230;  
+    } else { 
+          mouseX = mouseX;
+        }
 };
 
 
@@ -150,7 +159,7 @@ function setup() {
   createCanvas(1280, 720);
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('blue');
+  background('black');
 }
 
 
