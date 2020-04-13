@@ -28,6 +28,16 @@ var spelerY = 0; // y-positie van speler
 var kogelX = 0;    // x-positie van kogel
 var kogelY = 0;    // y-positie van kogel
 
+/* 
+variabele triangle vijand
+*/
+var vijandX = 67;
+var vijandY = 90;
+var vijandX2 = vijandX + 60;
+var vijandY2 = vijandY;
+var vijandX3 = vijandX + 30;
+var vijandY3 = vijandY+ 30;
+
 var vijandX = 0;   // x-positie van vijand
 var vijandY = 0;   // y-positie van vijand
 
@@ -57,7 +67,7 @@ var tekenVeld = function () {
  * @param {number} y y-coördinaat
  */
 var tekenVijand = function(x, y) {
-    
+     triangle (vijandX, vijandY, vijandX2, vijandY2, vijandX3, vijandY3);
 
 };
 
