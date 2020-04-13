@@ -38,8 +38,7 @@ var vijandY2 = vijandY;
 var vijandX3 = vijandX + 30;
 var vijandY3 = vijandY+ 30;
 
-var vijandX = 0;   // x-positie van vijand
-var vijandY = 0;   // y-positie van vijand
+
 
 var score = 0; // aantal behaalde punten
 
@@ -67,7 +66,9 @@ var tekenVeld = function () {
  * @param {number} y y-coördinaat
  */
 var tekenVijand = function(x, y) {
-     triangle (vijandX, vijandY, vijandX2, vijandY2, vijandX3, vijandY3);
+    noStroke();
+    fill(255,0,0);
+    triangle (vijandX, vijandY, vijandX2, vijandY2, vijandX3, vijandY3);
 
 };
 
