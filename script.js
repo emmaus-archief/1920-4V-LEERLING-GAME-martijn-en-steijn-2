@@ -79,18 +79,10 @@ var tekenKogel = function(x, y) {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-    var spelerY = 600;
-
+    
 fill(0, 0, 0);
-  triangle(mouseX - 30, spelerY + 15, mouseX, spelerY - 15, mouseX + 30, spelerY + 15);
-    if(mouseX <= 50){
-      mouseX = 50;
-    } else if(mouseX >= 1230){
-          mouseX = 1230;  
-    } else { 
-          mouseX = mouseX;
-        }
-};
+  triangle(spelerX - 30, spelerY + 15, spelerX, spelerY - 15, spelerX + 30, spelerY + 15);
+    };
 
 
 /**
@@ -114,7 +106,17 @@ var beweegKogel = function() {
  * Updatet globale variabele spelerX en spelerY
  */
 var beweegSpeler = function() {
+    
+    spelerY = 600;
+    spelerX = mouseX;
 
+if(mouseX <= 50){
+      spelerX = 50;
+    } else if(mouseX >= 1230){
+          spelerX = 1230;  
+    } else { 
+          spelerX = mouseX;
+        }
 };
 
 
