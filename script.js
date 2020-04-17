@@ -107,7 +107,7 @@ var beweegKogel = function() {
  */
 var beweegSpeler = function() {
     
-    spelerY = 600;
+    spelerY = mouseY;
     spelerX = mouseX;
 
 if(mouseX <= 50){
@@ -117,7 +117,16 @@ if(mouseX <= 50){
     } else { 
           spelerX = mouseX;
         }
+
+if(mouseY >= 685){
+       spelerY = 685;  
+    } else if(mouseY <= 500){
+       spelerY = 500;
+    } else { 
+        spelerY= mouseY;
+    }   
 };
+
 
 
 /**
@@ -171,6 +180,7 @@ function setup() {
  * uitgevoerd door de p5 library, nadat de setup functie klaar is
  */
 function draw() {
+    noStroke();
   switch (spelStatus) {
     case SPELEN:
       beweegVijand();
