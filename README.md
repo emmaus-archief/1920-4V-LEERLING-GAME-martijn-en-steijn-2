@@ -1,6 +1,6 @@
 # 1920-4HV-game-template
-Template voor de game-opdracht
 
+Met een vliegtuigje moet je vijanden ontwijken en neer proberen te schieten, als jij drie keer bent geraakt ben je game-over.
 
 ## Spel waarbij je vijand(en) moet ontwijken
 
