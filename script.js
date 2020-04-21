@@ -104,7 +104,6 @@ fill(0, 0, 0);
  * Updatet globale variabelen met positie van vijand of tegenspeler
  */
 var beweegVijand = function() {
-        fill(255, 255, 255);
         if(vijandWachtTijd === 0){
      vijandY += 1;
         }
