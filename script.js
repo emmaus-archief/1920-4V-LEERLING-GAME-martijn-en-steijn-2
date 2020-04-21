@@ -31,13 +31,9 @@ var kogelY = 0;    // y-positie van kogel
 /* 
 variabele triangle vijand
 */
-var vijandX = 67;
-var vijandY = 90;
-var vijandX2 = vijandX + 60;
-var vijandY2 = vijandY;
-var vijandX3 = vijandX + 30;
-var vijandY3 = vijandY+ 30;
-
+var vijandX = 67; // x-positie vijand
+var vijandY = 90; // y-positie vijand
+var vijandWachtTijd = 100; //aantal 50e van een seconde 
 
 
 var score = 0; // aantal behaalde punten
@@ -68,7 +64,7 @@ var tekenVeld = function () {
 var tekenVijand = function(x, y) {
     noStroke();
     fill(255,0,0);
-    triangle (vijandX, vijandY, vijandX2, vijandY2, vijandX3, vijandY3);
+     triangle (vijandX, vijandY, vijandX + 60, vijandY, vijandX + 30, vijandY + 30);
 
 };
 
@@ -108,7 +104,17 @@ fill(0, 0, 0);
  * Updatet globale variabelen met positie van vijand of tegenspeler
  */
 var beweegVijand = function() {
-    
+        fill(255, 255, 255);
+        if(vijandWachtTijd === 0){
+     vijandY += 1;
+        }
+        else{
+        vijandWachtTijd -= 1;
+        }
+        if (vijandY === 670){
+            vijandY -=1;
+        }
+  
 };
 
 
