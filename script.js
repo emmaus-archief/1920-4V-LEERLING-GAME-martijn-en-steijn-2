@@ -31,14 +31,14 @@ var kogelY = 0;    // y-positie van kogel
 /* 
 variabele triangle vijand
 */
-var vijandX = 67; // x-positie vijand
-var vijandY = 90; // y-positie vijand
+var vijandX = 90; // x-positie vijand
+var vijandY = 300; // y-positie vijand
 var vijandWachtTijd = 100; //aantal 50e van een seconde 
 
 
 var score = 0; // aantal behaalde punten
-
-
+var levens = 3; // aantal levens
+var weergaveLevens = "Levens:" + levens //weergeven hoeveel levens
 
 
 
@@ -53,6 +53,8 @@ var score = 0; // aantal behaalde punten
 var tekenVeld = function () {
   fill(135, 206, 235);
   rect(20, 20, width - 2 * 20, height - 2 * 20);
+  text(weergaveLevens , 50, 50, 10, 10);
+    
 };
 
 
@@ -64,8 +66,9 @@ var tekenVeld = function () {
 var tekenVijand = function(x, y) {
     noStroke();
     fill(255,0,0);
-     triangle (vijandX, vijandY, vijandX + 60, vijandY, vijandX + 30, vijandY + 30);
-
+     triangle (vijandX - 30, vijandY - 15, vijandX, vijandY + 15, vijandX + 30, vijandY - 15);
+    fill(0,0,255);
+    ellipse(x,y,10,10);
 };
 
 
@@ -89,9 +92,10 @@ var tekenSpeler = function(x, y) {
     
 fill(0, 0, 0);
   triangle(spelerX - 30, spelerY + 15, spelerX, spelerY - 15, spelerX + 30, spelerY + 15);
-    };
 
-
+   fill(0,0,255);
+   ellipse(x,y,10,10);
+};
 /**
  * Updatet globale variabelen met positie van vijand of tegenspeler
  */
@@ -161,7 +165,14 @@ var checkVijandGeraakt = function() {
  * @returns {boolean} true als speler is geraakt
  */
 var checkSpelerGeraakt = function() {
-    
+
+    console.log("checkSpelerGeraakt: levens =",levens);
+    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY)) {
+        levens -= 1; 
+        
+    } 
+
+
   return false;
 };
 
