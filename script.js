@@ -53,7 +53,10 @@ var weergaveLevens = "Levens:" + levens //weergeven hoeveel levens
 var tekenVeld = function () {
   fill(135, 206, 235);
   rect(20, 20, width - 2 * 20, height - 2 * 20);
-  text(weergaveLevens , 50, 50, 10, 10);
+  fill(0,0,0);
+  console.log(weergaveLevens);
+  text(weergaveLevens, 50, 50);
+  console.log("tekenVeld");
     
 };
 
