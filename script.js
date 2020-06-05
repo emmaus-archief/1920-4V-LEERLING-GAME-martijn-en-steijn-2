@@ -68,9 +68,7 @@ var tekenVeld = function () {
 var tekenVijand = function(x, y) {
     noStroke();
     fill(255,0,0);
-     triangle (vijandX - 30, vijandY - 15, vijandX, vijandY + 15, vijandX + 30, vijandY - 15);
-    fill(0,0,255);
-    ellipse(x,y,10,10);
+     triangle (x, y, x + 60, y, x + 30, y + 30);
 };
 
 
@@ -156,7 +154,11 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-
+    if ((kogelY - vijandY < 30) && (kogelX - vijandX < 60)){
+        vijandY = random (-30, -130);
+        aanwezigKogel = false;
+        score = score + 1;
+    }
   return false;
 };
 
