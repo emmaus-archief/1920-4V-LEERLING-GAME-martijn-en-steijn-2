@@ -38,7 +38,7 @@ var vijandWachtTijd = 100; //aantal 50e van een seconde
 
 var score = 0; // aantal behaalde punten
 var levens = 3; // aantal levens
-var weergaveLevens = "Levens:" + levens //weergeven hoeveel levens
+var weergaveLevens = "Levens:" + levens; //weergeven hoeveel levens
 
 
 
@@ -53,7 +53,7 @@ var weergaveLevens = "Levens:" + levens //weergeven hoeveel levens
 var tekenVeld = function () {
   fill(135, 206, 235);
   rect(20, 20, width - 2 * 20, height - 2 * 20);
-  text(weergaveLevens , 50, 50, 10, 10);
+  text(weergaveLevens , 50, 50);
     
 };
 
