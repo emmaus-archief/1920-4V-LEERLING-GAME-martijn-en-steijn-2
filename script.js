@@ -25,7 +25,7 @@ var spelStatus = SPELEN;
 var spelerX = 0; // x-positie van speler
 var spelerY = 0; // y-positie van speler
 
-var kogelX = [0];    // x-positie van kogel
+var kogelX = 0;    // x-positie van kogel
 var kogelY = 0;    // y-positie van kogel
 var aanwezigKogel = false;
 
@@ -65,7 +65,7 @@ var tekenVeld = function () {
 var tekenVijand = function(x, y) {
     noStroke();
     fill(255,0,0);
-     triangle (vijandX, vijandY, vijandX + 60, vijandY, vijandX + 30, vijandY + 30);
+     triangle (x, y, x + 60, y, x + 30, y + 30);
 };
 
 
@@ -162,7 +162,11 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-
+    if ((kogelY - vijandY < 30) && (kogelX - vijandX < 60)){
+        vijandY = random (-30, -130);
+        aanwezigKogel = false;
+        score = score + 1;
+    }
   return false;
 };
 
