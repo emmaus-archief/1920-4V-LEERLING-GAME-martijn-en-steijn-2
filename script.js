@@ -68,7 +68,7 @@ var tekenVijand = function(x, y) {
      triangle (x, y, x + 60, y, x + 30, y + 30);
 };
 
-
+     
 /**
  * Tekent de kogel of de bal
  * @param {number} x x-coördinaat
