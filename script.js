@@ -39,8 +39,14 @@ var vijandWachtTijd = 100; //aantal 50e van een seconde
 var score = 0; // aantal behaalde punten
 var levens = 3; // aantal levens
 
-
-
+var eindScherm = function() {
+    fill (0,0,0);
+    rect (20, 20, width - 2 * 20, height - 2 * 20); 
+    fill (255,255,255);
+    text ("Game Over", 50, 50);
+    text ("Score:" + score, 100, 100);
+    text ("Terug naar beginscherm", 150 , 150);
+};
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
 /* ********************************************* */
@@ -171,7 +177,7 @@ var checkVijandGeraakt = function() {
 var checkSpelerGeraakt = function() {
 
     console.log("checkSpelerGeraakt: levens =",levens);
-    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY)) {
+    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY) || (vijandY > 715 ) {
         levens = levens - 1; 
         vijandY = random (-50, -100); 
         vijandX = random (60, 1220);
@@ -187,7 +193,10 @@ var checkSpelerGeraakt = function() {
  * @returns {boolean} true als het spel is afgelopen
  */
 var checkGameOver = function() {
-    
+    if (levens = 0){
+        eindScherm;
+    }
+
   return false;
 };
 
