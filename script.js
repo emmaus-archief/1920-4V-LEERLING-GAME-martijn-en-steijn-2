@@ -5,7 +5,6 @@
 /* Game opdracht
    Informatica - Emmauscollege Rotterdam
    Template voor een game in JavaScript met de p5 library
-
    Begin met dit template voor je game opdracht,
    voeg er je eigen code aan toe.
  */
@@ -39,7 +38,9 @@ var vijandWachtTijd = 100; //aantal 50e van een seconde
 
 var score = 0; // aantal behaalde punten
 
-
+var beginScherm = function(){
+    rect(640, 280, 300, 150);
+}
 
 
 
@@ -54,6 +55,11 @@ var score = 0; // aantal behaalde punten
 var tekenVeld = function () {
   fill(135, 206, 235);
   rect(20, 20, width - 2 * 20, height - 2 * 20);
+  fill(0,0,0);
+  //console.log(weergaveLevens);
+  //text("Levens: " + levens, 50, 50);
+  console.log("tekenVeld");
+  text("Score:" + score, 50, 1230);  
 };
 
 
@@ -162,8 +168,9 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    if ((kogelY - vijandY < 30) && (kogelX - vijandX < 60)){
-        vijandY = random (-30, -130);
+    if ((kogelY - vijandY < 30) && (kogelX - vijandX < 60) && (kogelX - vijandX > 30)){
+        vijandY = random(-30, -130);
+        vijandX = random(30, 1250);
         aanwezigKogel = false;
         score = score + 1;
     }
@@ -240,4 +247,3 @@ function draw() {
       break;
   }
 }
-
