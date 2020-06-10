@@ -177,7 +177,7 @@ var checkVijandGeraakt = function() {
 var checkSpelerGeraakt = function() {
 
     console.log("checkSpelerGeraakt: levens =",levens);
-    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY) || (vijandY > 715 ) {
+    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY) || (vijandY > 715 )) {
         levens = levens - 1; 
         vijandY = random (-50, -100); 
         vijandX = random (60, 1220);
