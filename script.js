@@ -65,8 +65,7 @@ var tekenVeld = function () {
   fill(135, 206, 235);
   rect(20, 20, width - 2 * 20, height - 2 * 20);
   fill(0,0,0);
-  //console.log(weergaveLevens);
-  //text("Levens: " + levens, 50, 50);
+  text("Levens: " + levens, 50, 50);
   console.log("tekenVeld");
   text("Score:" + score, 50, 1230);  
 };
@@ -267,7 +266,7 @@ function draw() {
       break;
       case GAMEOVER:
       tekenEindScherm();
-      if (keyIsDown (32)) {
+      if (keyIsPressed (32)) {
           spelStatus = SPELEN;
       }
       break;
