@@ -27,10 +27,6 @@ var spelerY = 0; // y-positie van speler
 var kogelX = 0;    // x-positie van kogel
 var kogelY = 0;    // y-positie van kogel
 var aanwezigKogel = false;
-<<<<<<< HEAD
-=======
-
->>>>>>> b98b45107615a0f7d6a1e5ad029059fa661e4211
 /* 
 variabele triangle vijand
 */
@@ -40,6 +36,7 @@ var vijandWachtTijd = 100; //aantal 50e van een seconde
 
 
 var score = 0; // aantal behaalde punten
+var levens = 3; //aantal levens
 
 var beginScherm = function(){
     rect(640, 280, 300, 150);
@@ -98,9 +95,6 @@ var tekenKogel = function(x, y) {
     if (aanwezigKogel === true){
          ellipse (x, y, 5, 15);
      }
-<<<<<<< HEAD
-
-=======
     };
     
 /**
@@ -116,7 +110,6 @@ var beweegKogel = function() {
     if (kogelY < 30) {
         aanwezigKogel = false;
     }
->>>>>>> b98b45107615a0f7d6a1e5ad029059fa661e4211
 };
 
 /**
@@ -148,7 +141,6 @@ var beweegVijand = function() {
 };
 
 
-<<<<<<< HEAD
 /**
  * Updatet globale variabelen met positie van kogel of bal
  */
@@ -163,9 +155,6 @@ var beweegKogel = function() {
         aanwezigKogel = false;
     }
 };
-=======
-
->>>>>>> b98b45107615a0f7d6a1e5ad029059fa661e4211
 
 
 /**
