@@ -103,8 +103,8 @@ var beweegKogel = function() {
     kogelY = kogelY - 8;
     if ((aanwezigKogel === false) && (mouseIsPressed)) {
         aanwezigKogel = true;
-        kogelY = mouseY; 
-        kogelX = mouseX; 
+        kogelY = spelerY; 
+        kogelX = spelerX; 
     }
     if (kogelY < 30) {
         aanwezigKogel = false;
@@ -139,23 +139,6 @@ var beweegVijand = function() {
   
 };
 
-
-/**
- * Updatet globale variabelen met positie van kogel of bal
- */
-var beweegKogel = function() {
-    kogelY = kogelY - 8;
-    if ((aanwezigKogel === false) && (mouseIsPressed)) {
-        aanwezigKogel = true;
-        kogelY = spelerY; 
-        kogelX = mouseX; 
-    }
-    if (kogelY < 30) {
-        aanwezigKogel = false;
-    }
-};
-
-
 /**
  * Kijkt wat de toetsen/muis etc zijn.
  * Updatet globale variabele spelerX en spelerY
@@ -166,7 +149,7 @@ var beweegSpeler = function() {
     spelerX = mouseX;
 
 if(mouseX <= 50){
-      spelerX = 50;
+65      spelerX = 50;
     } else if(mouseX >= 1230){
           spelerX = 1230;  
     } else { 
@@ -189,7 +172,7 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    if ((kogelY - vijandY < 30) && (kogelX - vijandX < 60) && (kogelX - vijandX > 30)){
+    if ((kogelY - vijandY < 30) && (abs(vijandX - kogelX) < 50)){
         vijandY = random(-30, -130);
         vijandX = random(30, 1250);
         aanwezigKogel = false;
