@@ -45,12 +45,12 @@ var beginScherm = function(){
 
 var tekenEindScherm = function() {
     fill (0,0,0);
-    rect (20, 20, width - 2 * 20, height - 2 * 20); 
+    rect (0, 0, width - 2 * 20, height - 2 * 20); 
     fill (255,255,255);
     textSize(50);
     text ("Game Over", 640, 50);
     text ("Score:" + score, 100, 100);
-    text ("Terug naar beginscherm", 150 , 150);
+    text ("Druk spatie om naar het beginscherm te gaan", 150 , 150);
 };
 
 /* ********************************************* */
