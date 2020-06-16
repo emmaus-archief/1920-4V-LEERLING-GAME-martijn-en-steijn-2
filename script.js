@@ -27,7 +27,7 @@ var spelerY = 0; // y-positie van speler
 
 var kogelX = 0;    // x-positie van kogel
 var kogelY = 0;    // y-positie van kogel
-
+var aanwezigKogel = false;
 /* 
 variabele triangle vijand
 */
@@ -39,14 +39,17 @@ var vijandWachtTijd = 100; //aantal 50e van een seconde
 var score = 0; // aantal behaalde punten
 var levens = 3; // aantal levens
 
-var eindScherm = function() {
+
+var tekenEindScherm = function() {
     fill (0,0,0);
     rect (20, 20, width - 2 * 20, height - 2 * 20); 
     fill (255,255,255);
-    text ("Game Over", 50, 50);
+    textSize(50);
+    text ("Game Over", 640, 50);
     text ("Score:" + score, 100, 100);
     text ("Terug naar beginscherm", 150 , 150);
 };
+
 /* ********************************************* */
 /*      functies die je gebruikt in je game      */
 /* ********************************************* */
@@ -84,7 +87,11 @@ var tekenVijand = function(x, y) {
  * @param {number} y y-coördinaat
  */
 var tekenKogel = function(x, y) {
+    fill(255, 0, 0);
 
+    if (aanwezigKogel === true){
+         ellipse (x, y, 5, 15);
+     }
 
 };
 
@@ -107,7 +114,7 @@ fill(0, 0, 0);
  */
 var beweegVijand = function() {
         if(vijandWachtTijd === 0){
-     vijandY += 1;
+     vijandY += 10;
         }
         else{
         vijandWachtTijd -= 1;
@@ -123,7 +130,15 @@ var beweegVijand = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogel = function() {
-
+    kogelY = kogelY - 8;
+    if ((aanwezigKogel === false) && (mouseIsPressed)) {
+        aanwezigKogel = true;
+        kogelY = mouseY; 
+        kogelX = mouseX; 
+    }
+    if (kogelY < 30) {
+        aanwezigKogel = false;
+    }
 };
 
 
@@ -177,7 +192,7 @@ var checkVijandGeraakt = function() {
 var checkSpelerGeraakt = function() {
 
     console.log("checkSpelerGeraakt: levens =",levens);
-    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY) || (vijandY > 715 )) {
+    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY) || (abs(vijandY) > 671)) {
         levens = levens - 1; 
         vijandY = random (-50, -100); 
         vijandX = random (60, 1220);
@@ -188,17 +203,7 @@ var checkSpelerGeraakt = function() {
 };
 
 
-/**
- * Zoekt uit of het spel is afgelopen
- * @returns {boolean} true als het spel is afgelopen
- */
-var checkGameOver = function() {
-    if (levens = 0){
-        eindScherm;
-    }
 
-  return false;
-};
 
 
 /**
@@ -243,8 +248,14 @@ function draw() {
       tekenKogel(kogelX, kogelY);
       tekenSpeler(spelerX, spelerY);
 
-      if (checkGameOver()) {
+      if (levens === 0) {
         spelStatus = GAMEOVER;
+      }
+      break;
+      case GAMEOVER:
+      tekenEindScherm();
+      if (keyIsDown (32)) {
+          spelStatus = SPELEN;
       }
       break;
   }
