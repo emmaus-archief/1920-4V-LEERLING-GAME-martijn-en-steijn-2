@@ -65,8 +65,7 @@ var tekenVeld = function () {
   fill(135, 206, 235);
   rect(20, 20, width - 2 * 20, height - 2 * 20);
   fill(0,0,0);
-  //console.log(weergaveLevens);
-  //text("Levens: " + levens, 50, 50);
+  text("Levens: " + levens, 50, 50);
   console.log("tekenVeld");
   text("Score:" + score, 50, 1230);  
 };
@@ -104,8 +103,8 @@ var beweegKogel = function() {
     kogelY = kogelY - 8;
     if ((aanwezigKogel === false) && (mouseIsPressed)) {
         aanwezigKogel = true;
-        kogelY = mouseY; 
-        kogelX = mouseX; 
+        kogelY = spelerY; 
+        kogelX = spelerX; 
     }
     if (kogelY < 30) {
         aanwezigKogel = false;
@@ -129,7 +128,7 @@ fill(0, 0, 0);
  */
 var beweegVijand = function() {
         if(vijandWachtTijd === 0){
-     vijandY += 10;
+     vijandY += 1;
         }
         else{
         vijandWachtTijd -= 1;
@@ -139,23 +138,6 @@ var beweegVijand = function() {
         }
   
 };
-
-
-/**
- * Updatet globale variabelen met positie van kogel of bal
- */
-var beweegKogel = function() {
-    kogelY = kogelY - 8;
-    if ((aanwezigKogel === false) && (mouseIsPressed)) {
-        aanwezigKogel = true;
-        kogelY = mouseY; 
-        kogelX = mouseX; 
-    }
-    if (kogelY < 30) {
-        aanwezigKogel = false;
-    }
-};
-
 
 /**
  * Kijkt wat de toetsen/muis etc zijn.
@@ -190,7 +172,7 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    if ((kogelY - vijandY < 30) && (kogelX - vijandX < 60) && (kogelX - vijandX > 30)){
+    if ((kogelY - vijandY < 30) && (abs(vijandX - kogelX) < 50)){
         vijandY = random(-30, -130);
         vijandX = random(30, 1250);
         aanwezigKogel = false;
@@ -267,7 +249,7 @@ function draw() {
       break;
       case GAMEOVER:
       tekenEindScherm();
-      if (keyIsDown (32)) {
+      if (keyIsPressed (32)) {
           spelStatus = SPELEN;
       }
       break;
