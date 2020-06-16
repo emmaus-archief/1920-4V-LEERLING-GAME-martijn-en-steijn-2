@@ -128,7 +128,7 @@ fill(0, 0, 0);
  */
 var beweegVijand = function() {
         if(vijandWachtTijd === 0){
-     vijandY += 10;
+     vijandY += 3;
         }
         else{
         vijandWachtTijd -= 1;
@@ -147,7 +147,7 @@ var beweegKogel = function() {
     kogelY = kogelY - 8;
     if ((aanwezigKogel === false) && (mouseIsPressed)) {
         aanwezigKogel = true;
-        kogelY = mouseY; 
+        kogelY = spelerY; 
         kogelX = mouseX; 
     }
     if (kogelY < 30) {
@@ -240,6 +240,12 @@ function setup() {
 function draw() {
     noStroke();
   switch (spelStatus) {
+    case UITLEG:
+        beginScherm();
+    if (keyIsDown (13)){
+        spelStatus = SPELEN;
+    }
+    break;  
     case SPELEN:
       beweegVijand();
       beweegKogel();
@@ -266,8 +272,8 @@ function draw() {
       break;
       case GAMEOVER:
       tekenEindScherm();
-      if (keyIsPressed (32)) {
-          spelStatus = SPELEN;
+      if (keyIsDown (32)) {
+          spelStatus = UITLEG;
       }
       break;
   }
