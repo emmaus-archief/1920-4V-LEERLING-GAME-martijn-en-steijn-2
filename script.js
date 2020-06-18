@@ -87,9 +87,13 @@ var tekenVeld = function () {
 var tekenAlleVijanden = function() {
     noStroke();
     fill(255,0,0);
+<<<<<<< HEAD
     for (var i=0; i < vijandX.length; i++) {
      triangle (vijandX[i], vijandY[i], vijandX[i] + 60, vijandY[i], vijandX[i] + 30, vijandY[i] + 30);
     }
+=======
+     triangle (x, y, x + 60, y, x + 30, y + 30);
+>>>>>>> ee3190ad40d3becedc5c715b451aac1baf66f125
 };
 
 //tekent de kogels    
@@ -132,7 +136,9 @@ var tekenSpeler = function(x, y) {
     
 fill(0, 0, 0);
   triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
-    };
+
+   
+};
 
 
 /**
@@ -181,6 +187,7 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
+<<<<<<< HEAD
     for (var i = 0; i < vijandX.length; i++) {
         for(var o = 0; o < kogelX.length; o++){
             //rect(vijandX[0], vijandY[0], 30, 50);
@@ -194,6 +201,13 @@ var checkVijandGeraakt = function() {
                 }
             }      
         }
+=======
+    if ((abs(kogelY - (vijandY + 15)) < 30) && (abs((vijandX + 30) - kogelX) < 40)){
+        vijandY = random(-30, -130);
+        vijandX = random(30, 1250);
+        aanwezigKogel = false;
+        score = score + 1;
+>>>>>>> ee3190ad40d3becedc5c715b451aac1baf66f125
     }
   return false;
 };
@@ -206,8 +220,12 @@ var checkVijandGeraakt = function() {
  */
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
+<<<<<<< HEAD
     for (var i = 0; i < vijandX.length; i++) {
         if(( abs(spelerX - vijandX[i]) < 30) && (spelerY < vijandY[i]) || (abs(vijandY[i]) > 671)) {
+=======
+    if(( abs((spelerX - 30) - vijandX) < 60) && ((spelerY - 15) <= vijandY) || (abs(vijandY) > 671)) {
+>>>>>>> ee3190ad40d3becedc5c715b451aac1baf66f125
         levens = levens - 1; 
         vijandY[i] = random (-50, -300); 
         vijandX[i] = random (60, 1200);
