@@ -91,14 +91,7 @@ var tekenVijand = function(x, y) {
     fill(255,0,0);
      triangle (x, y, x + 60, y, x + 30, y + 30);
 
-         // draw debug point
-    push();
-    fill("yellow");
-    ellipse (x,y, 10,10);
-    stroke("yellow");
-    noFill();
-    rect(x-20,y-15,40,30);
-    pop();
+     
 };
 
      
@@ -114,9 +107,7 @@ var tekenKogel = function(x, y) {
          ellipse (x, y, 5, 15);
      }
   
-    // draw debug point
-    fill("yellow");
-    ellipse (x, y, 10,10);
+   
 };
 
 /**
@@ -195,7 +186,7 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    if ((abs(kogelY - vijandY) < 30) && (abs(vijandX - kogelX) < 40)){
+    if ((abs(kogelY - vijandY) < 30) && (abs((vijandX + 30) - kogelX) < 40)){
         vijandY = random(-30, -130);
         vijandX = random(30, 1250);
         aanwezigKogel = false;
