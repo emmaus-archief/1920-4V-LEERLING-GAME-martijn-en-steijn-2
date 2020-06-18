@@ -91,7 +91,13 @@ var tekenVijand = function(x, y) {
     fill(255,0,0);
      triangle (x, y, x + 60, y, x + 30, y + 30);
 
-     
+         push();
+    fill("yellow");
+    ellipse (x,y, 10,10);
+    stroke("yellow");
+    noFill();
+    rect(x ,y,60,30);
+    pop();
 };
 
      
@@ -203,7 +209,7 @@ var checkVijandGeraakt = function() {
  */
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
-    if(( abs(spelerX - vijandX) < 40) && (spelerY <= vijandY) || (abs(vijandY) > 671)) {
+    if(( abs(spelerX - vijandX) < 30) && (spelerY <= vijandY) || (abs(vijandY) > 671)) {
         levens = levens - 1; 
         vijandY = random (-50, -100); 
         vijandX = random (60, 1220);
