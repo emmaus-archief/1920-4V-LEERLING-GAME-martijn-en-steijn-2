@@ -24,14 +24,14 @@ var spelStatus = SPELEN;
 var spelerX = 0; // x-positie van speler
 var spelerY = 0; // y-positie van speler
 
-var kogelX = 0;    // x-positie van kogel
-var kogelY = 0;    // y-positie van kogel
+var kogelX = [];    // x-positie van kogel
+var kogelY = [];    // y-positie van kogel
 var aanwezigKogel = false;
 /* 
 variabele triangle vijand
 */
-var vijandX = 67; // x-positie vijand
-var vijandY = 90; // y-positie vijand
+var vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
+var vijandY = [0, -10, -50, -60, -80, -120]; // y-positie vijand
 var vijandWachtTijd = 100; //aantal 50e van een seconde 
 
 
@@ -39,8 +39,22 @@ var score = 0; // aantal behaalde punten
 var levens = 3; //aantal levens
 
 var beginScherm = function(){
+    spelStatus = SPELEN;
+
+spelerX = 0; // x-positie van speler
+spelerY = 0; // y-positie van speler
+
+/* 
+variabele triangle vijand
+*/
+vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
+vijandY = [90, -200, -400, -500, -650, -700]; // y-positie vijand
+
+score = 0; // aantal behaalde punten
+levens = 3; //aantal levens
+
     rect(640, 280, 300, 150);
-}
+};
 
 
 var tekenEindScherm = function() {
@@ -73,41 +87,43 @@ var tekenVeld = function () {
 
 /**
  * Tekent de vijand
- * @param {number} x x-coördinaat
- * @param {number} y y-coördinaat
  */
-var tekenVijand = function(x, y) {
+var tekenAlleVijanden = function() {
     noStroke();
     fill(255,0,0);
-     triangle (x, y, x + 60, y, x + 30, y + 30);
+    for (var i=0; i < vijandX.length; i++) {
+     triangle (vijandX[i], vijandY[i], vijandX[i] + 60, vijandY[i], vijandX[i] + 30, vijandY[i] + 30);
+    }
 };
 
-     
-/**
- * Tekent de kogel of de bal
- * @param {number} x x-coördinaat
- * @param {number} y y-coördinaat
- */
-var tekenKogel = function(x, y) {
+//tekent de kogels    
+var tekenKogels = function() {
     fill(255, 0, 0);
-
-    if (aanwezigKogel === true){
-         ellipse (x, y, 5, 15);
-     }
-    };
+    for(var o=0; o < 3; o++){
+        if (aanwezigKogel === true){
+            ellipse (kogelX[o], kogelY[o], 5, 15);
+        }
+    }    
+};
     
 /**
  * Updatet globale variabelen met positie van kogel of bal
  */
-var beweegKogel = function() {
-    kogelY = kogelY - 8;
-    if ((aanwezigKogel === false) && (mouseIsPressed)) {
-        aanwezigKogel = true;
-        kogelY = spelerY; 
-        kogelX = spelerX; 
-    }
-    if (kogelY < 30) {
-        aanwezigKogel = false;
+var beweegKogels = function() {
+    for(var o = 0; o < 3; o++){
+        if ((aanwezigKogel === false) && (mouseIsPressed)) {
+            aanwezigKogel = true;
+            kogelY[o] = spelerY; 
+            kogelX[o] = spelerX; 
+            kogelX.push(mouseX);
+            kogelY.push(mouseY);
+        }
+        if (kogelY[o] < 30) {
+            aanwezigKogel = false;
+        }
+        if (aanwezigKogel === true){
+            kogelY[o] = kogelY[o] - 8;
+        }
     }
 };
 
@@ -126,18 +142,15 @@ fill(0, 0, 0);
 /**
  * Updatet globale variabelen met positie van vijand of tegenspeler
  */
-var beweegVijand = function() {
-        if(vijandWachtTijd === 0){
-     vijandY += 3;
+var beweegAlleVijanden = function() {
+    for (var i=0; i < vijandX.length; i++) {
+     vijandY[i] += 3;
         }
-        else{
-        vijandWachtTijd -= 1;
+        if (vijandY[i] === 670){
+            vijandY[i] = random(-10, -160);
+            vijandX[i] = random(60, 1200);
         }
-        if (vijandY === 670){
-            vijandY -=1;
-        }
-  
-};
+    };
 
 /**
  * Kijkt wat de toetsen/muis etc zijn.
@@ -149,7 +162,7 @@ var beweegSpeler = function() {
     spelerX = mouseX;
 
 if(mouseX <= 50){
-65      spelerX = 50;
+          spelerX = 50;
     } else if(mouseX >= 1230){
           spelerX = 1230;  
     } else { 
@@ -172,11 +185,19 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    if ((kogelY - vijandY < 30) && (abs(vijandX - kogelX) < 50)){
-        vijandY = random(-30, -130);
-        vijandX = random(30, 1250);
-        aanwezigKogel = false;
-        score = score + 1;
+    for (var i = 0; i < vijandX.length; i++) {
+        for(var o = 0; o < kogelX.length; o++){
+            rect(vijandX[0], vijandY[0], 30, 50);
+            if (( abs(kogelY[o] - vijandY[i]) < 30) && (abs(vijandX[i] - kogelX[o]) < 50)){
+            vijandY[i] = random(-30, -300);
+            vijandX[i] = random(30, 1230);
+            aanwezigKogel = false;
+            score = score + 1;
+                if (i >= 10){
+                i = 0;
+                }
+            }      
+        }
     }
   return false;
 };
@@ -189,11 +210,13 @@ var checkVijandGeraakt = function() {
  */
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
-    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY) || (abs(vijandY) > 671)) {
+    for (var i = 0; i < vijandX.length; i++) {
+        if(( abs(spelerX - vijandX[i]) < 30) && (spelerY < vijandY[i]) || (abs(vijandY[i]) > 671)) {
         levens = levens - 1; 
-        vijandY = random (-50, -100); 
-        vijandX = random (60, 1220);
-    } 
+        vijandY[i] = random (-50, -300); 
+        vijandX[i] = random (60, 1200);
+        } 
+    }
   return false;
 };
 
@@ -230,8 +253,8 @@ function draw() {
     }
     break;  
     case SPELEN:
-      beweegVijand();
-      beweegKogel();
+      beweegAlleVijanden();
+      beweegKogels();
       beweegSpeler();
       
       if (checkVijandGeraakt()) {
@@ -245,8 +268,8 @@ function draw() {
       }
 
       tekenVeld();
-      tekenVijand(vijandX, vijandY);
-      tekenKogel(kogelX, kogelY);
+      tekenAlleVijanden();
+      tekenKogels();
       tekenSpeler(spelerX, spelerY);
 
       if (levens === 0) {
