@@ -19,7 +19,7 @@
 const UITLEG = 0;
 const SPELEN = 1;
 const GAMEOVER = 2;
-var spelStatus = SPELEN;
+var spelStatus = UITLEG;
 
 var spelerX = 0; // x-positie van speler
 var spelerY = 0; // y-positie van speler
@@ -39,18 +39,28 @@ var score = 0; // aantal behaalde punten
 var levens = 3; //aantal levens
 
 var beginScherm = function(){
-    rect(640, 280, 300, 150);
+    fill(0,0,0);
+    rect(0, 0, 1280, 720);
+    fill(255,255,255);
+    textSize(50);
+    text("Ruimte Kapers", 460, 100);
+    textSize(30);
+    text("Benodigde toetsen:", 490, 300);
+    text("De muis om te bewegen", 460, 350);
+    text("De linkermuisknop om te schieten", 400, 400);
+    text("Druk op enter om te beginnen", 420, 500 )
 }
 
 
 var tekenEindScherm = function() {
     fill (0,0,0);
-    rect (0, 0, width - 2 * 20, height - 2 * 20); 
+    rect (0, 0, 1280, 720); 
     fill (255,255,255);
     textSize(50);
-    text ("Game Over", 640, 50);
-    text ("Score:" + score, 100, 100);
-    text ("Druk spatie om naar het beginscherm te gaan", 150 , 150);
+    text ("Game Over", 465, 100);
+    textSize (30);
+    text ("Score: " + score, 550, 300);
+    text ("Druk spatie om naar het beginscherm te gaan", 340 , 500);
 };
 
 /* ********************************************* */
@@ -63,11 +73,11 @@ var tekenEindScherm = function() {
  */
 var tekenVeld = function () {
   fill(135, 206, 235);
-  rect(20, 20, width - 2 * 20, height - 2 * 20);
+  rect(0, 0, 1280, 1280);
   fill(0,0,0);
   text("Levens: " + levens, 50, 50);
   console.log("tekenVeld");
-  text("Score:" + score, 50, 1230);  
+  text("Score: " + score, 150, 50);  
 };
 
 
@@ -80,6 +90,15 @@ var tekenVijand = function(x, y) {
     noStroke();
     fill(255,0,0);
      triangle (x, y, x + 60, y, x + 30, y + 30);
+
+         // draw debug point
+    push();
+    fill("yellow");
+    ellipse (x,y, 10,10);
+    stroke("yellow");
+    noFill();
+    rect(x-20,y-15,40,30);
+    pop();
 };
 
      
@@ -94,8 +113,12 @@ var tekenKogel = function(x, y) {
     if (aanwezigKogel === true){
          ellipse (x, y, 5, 15);
      }
-    };
-    
+  
+    // draw debug point
+    fill("yellow");
+    ellipse (x, y, 10,10);
+};
+
 /**
  * Updatet globale variabelen met positie van kogel of bal
  */
@@ -149,7 +172,7 @@ var beweegSpeler = function() {
     spelerX = mouseX;
 
 if(mouseX <= 50){
-65      spelerX = 50;
+      spelerX = 50;
     } else if(mouseX >= 1230){
           spelerX = 1230;  
     } else { 
@@ -172,7 +195,7 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    if ((kogelY - vijandY < 30) && (abs(vijandX - kogelX) < 50)){
+    if ((abs(kogelY - vijandY) < 30) && (abs(vijandX - kogelX) < 40)){
         vijandY = random(-30, -130);
         vijandX = random(30, 1250);
         aanwezigKogel = false;
@@ -189,7 +212,7 @@ var checkVijandGeraakt = function() {
  */
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
-    if(( abs(spelerX - vijandX) < 30) && (spelerY < vijandY) || (abs(vijandY) > 671)) {
+    if(( abs(spelerX - vijandX) < 40) && (spelerY <= vijandY) || (abs(vijandY) > 671)) {
         levens = levens - 1; 
         vijandY = random (-50, -100); 
         vijandX = random (60, 1220);
@@ -227,6 +250,9 @@ function draw() {
         beginScherm();
     if (keyIsDown (13)){
         spelStatus = SPELEN;
+        textSize(20);
+        levens = 3;
+        score = 0;
     }
     break;  
     case SPELEN:
