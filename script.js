@@ -19,7 +19,7 @@
 const UITLEG = 0;
 const SPELEN = 1;
 const GAMEOVER = 2;
-var spelStatus = SPELEN;
+var spelStatus = UITLEG;
 
 var spelerX = 0; // x-positie van speler
 var spelerY = 0; // y-positie van speler
@@ -31,40 +31,36 @@ var aanwezigKogel = false;
 variabele triangle vijand
 */
 var vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
-var vijandY = [0, -10, -50, -60, -80, -120]; // y-positie vijand
-var vijandWachtTijd = 100; //aantal 50e van een seconde 
+var vijandY = [90, -200, -400, -500, -650, -700]; // y-positie vijand
+//var vijandWachtTijd = 100; //aantal 50e van een seconde 
 
 
 var score = 0; // aantal behaalde punten
 var levens = 3; //aantal levens
 
 var beginScherm = function(){
-    spelStatus = SPELEN;
-
-spelerX = 0; // x-positie van speler
-spelerY = 0; // y-positie van speler
-
-/* 
-variabele triangle vijand
-*/
-vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
-vijandY = [90, -200, -400, -500, -650, -700]; // y-positie vijand
-
-score = 0; // aantal behaalde punten
-levens = 3; //aantal levens
-
-    rect(640, 280, 300, 150);
-};
+    fill(0,0,0);
+    rect(0, 0, 1280, 720);
+    fill(255,255,255);
+    textSize(50);
+    text("Ruimte Kapers", 460, 100);
+    textSize(30);
+    text("Benodigde toetsen:", 490, 300);
+    text("De muis om te bewegen", 460, 350);
+    text("De linkermuisknop om te schieten", 400, 400);
+    text("Druk op enter om te beginnen", 420, 500 )
+}
 
 
 var tekenEindScherm = function() {
     fill (0,0,0);
-    rect (0, 0, width - 2 * 20, height - 2 * 20); 
+    rect (0, 0, 1280, 720); 
     fill (255,255,255);
     textSize(50);
-    text ("Game Over", 640, 50);
-    text ("Score:" + score, 100, 100);
-    text ("Druk spatie om naar het beginscherm te gaan", 150 , 150);
+    text ("Game Over", 465, 100);
+    textSize (30);
+    text ("Score: " + score, 550, 300);
+    text ("Druk spatie om naar het beginscherm te gaan", 340 , 500);
 };
 
 /* ********************************************* */
@@ -77,11 +73,11 @@ var tekenEindScherm = function() {
  */
 var tekenVeld = function () {
   fill(135, 206, 235);
-  rect(20, 20, width - 2 * 20, height - 2 * 20);
+  rect(0, 0, 1280, 1280);
   fill(0,0,0);
   text("Levens: " + levens, 50, 50);
   console.log("tekenVeld");
-  text("Score:" + score, 50, 1230);  
+  text("Score: " + score, 150, 50);  
 };
 
 
@@ -112,11 +108,11 @@ var tekenKogels = function() {
 var beweegKogels = function() {
     for(var o = 0; o < 3; o++){
         if ((aanwezigKogel === false) && (mouseIsPressed)) {
-            aanwezigKogel = true;
+            aanwezigKogel[o] = true;
             kogelY[o] = spelerY; 
             kogelX[o] = spelerX; 
-            kogelX.push(mouseX);
-            kogelY.push(mouseY);
+            kogelX.push(spelerX);
+            kogelY.push(spelerY);
         }
         if (kogelY[o] < 30) {
             aanwezigKogel = false;
@@ -162,7 +158,7 @@ var beweegSpeler = function() {
     spelerX = mouseX;
 
 if(mouseX <= 50){
-          spelerX = 50;
+      spelerX = 50;
     } else if(mouseX >= 1230){
           spelerX = 1230;  
     } else { 
@@ -187,7 +183,7 @@ if(mouseY >= 685){
 var checkVijandGeraakt = function() {
     for (var i = 0; i < vijandX.length; i++) {
         for(var o = 0; o < kogelX.length; o++){
-            rect(vijandX[0], vijandY[0], 30, 50);
+            //rect(vijandX[0], vijandY[0], 30, 50);
             if (( abs(kogelY[o] - vijandY[i]) < 30) && (abs(vijandX[i] - kogelX[o]) < 50)){
             vijandY[i] = random(-30, -300);
             vijandX[i] = random(30, 1230);
@@ -250,6 +246,9 @@ function draw() {
         beginScherm();
     if (keyIsDown (13)){
         spelStatus = SPELEN;
+        textSize(20);
+        levens = 3;
+        score = 0;
     }
     break;  
     case SPELEN:
