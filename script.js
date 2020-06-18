@@ -90,14 +90,6 @@ var tekenVijand = function(x, y) {
     noStroke();
     fill(255,0,0);
      triangle (x, y, x + 60, y, x + 30, y + 30);
-
-         push();
-    fill("yellow");
-    ellipse (x,y, 10,10);
-    stroke("yellow");
-    noFill();
-    rect(x ,y,60,30);
-    pop();
 };
 
      
@@ -140,7 +132,9 @@ var tekenSpeler = function(x, y) {
     
 fill(0, 0, 0);
   triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
-    };
+
+   
+};
 
 
 /**
@@ -192,7 +186,7 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    if ((abs(kogelY - vijandY) < 30) && (abs((vijandX + 30) - kogelX) < 40)){
+    if ((abs(kogelY - (vijandY + 15)) < 30) && (abs((vijandX + 30) - kogelX) < 40)){
         vijandY = random(-30, -130);
         vijandX = random(30, 1250);
         aanwezigKogel = false;
@@ -209,7 +203,7 @@ var checkVijandGeraakt = function() {
  */
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
-    if(( abs(spelerX - vijandX) < 30) && (spelerY <= vijandY) || (abs(vijandY) > 671)) {
+    if(( abs((spelerX - 30) - vijandX) < 60) && ((spelerY - 15) <= vijandY) || (abs(vijandY) > 671)) {
         levens = levens - 1; 
         vijandY = random (-50, -100); 
         vijandX = random (60, 1220);
