@@ -284,7 +284,7 @@ function draw() {
       tekenKogels();
       tekenSpeler(spelerX, spelerY);
 
-      if (levens === 0) {
+      if (levens <= 0) {
         spelStatus = GAMEOVER;
       }
       break;
