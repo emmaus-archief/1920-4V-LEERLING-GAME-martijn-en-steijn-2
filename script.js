@@ -31,7 +31,7 @@ var kogelY = [];    // y-positie van kogel
 variabele triangle vijand
 */
 var vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
-var vijandY = [90, -200, -400, -500, -650, -700]; // y-positie vijand
+var vijandY = [-90, -200, -400, -500, -650, -700]; // y-positie vijand
 //var vijandWachtTijd = 100; //aantal 50e van een seconde 
 
 
@@ -95,8 +95,8 @@ var tekenAlleVijanden = function() {
 //tekent de kogels    
 var tekenKogels = function() {
     fill(255, 0, 0);
-    for(var o=0; o < kogelX.length; o++){
-            ellipse (kogelX[o], kogelY[o], 5, 15);
+      for(var o = 0; o < kogelX.length; o++){ // Voor o < vijandX.length oneindig veel kogels??
+        ellipse (kogelX[o], kogelY[o], 5, 15);
     }    
 };
     
@@ -104,7 +104,6 @@ var tekenKogels = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogels = function() {
-    
     if (mouseIsPressed) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
         kogelX.push(spelerX); // voeg kogel toe aan het einde van de array
         kogelY.push(spelerY); // voeg kogel toe aan het einde van de array
@@ -117,7 +116,7 @@ var beweegKogels = function() {
             kogelY[o] = kogelY[o] - 8;
         }
     }
-};
+};*/
 
 /**
  * Tekent de speler
@@ -128,8 +127,6 @@ var tekenSpeler = function(x, y) {
     
 fill(0, 0, 0);
   triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
-
-   
 };
 
 
@@ -180,13 +177,13 @@ if(mouseY >= 685){
  */
 var checkVijandGeraakt = function() {
     for (var i = 0; i < vijandX.length; i++) {
-        for(var o = 0; o < kogelX.length; o++){
-            //rect(vijandX[0], vijandY[0], 30, 50);
-            if (( abs(kogelY[o] - vijandY[i]) < 30) && (abs(vijandX[i] - kogelX[o]) < 50)){
+        for(var o = 0; o < 3; o++){
+            if (( abs(kogelY[o] - (vijandY[i] + 15)) < 30) && (abs((vijandX[i] + 30) - kogelX[o]) < 40)){
             vijandY[i] = random(-30, -300);
             vijandX[i] = random(30, 1230);
+
             kogelY.splice(o,1); // verwijder kogel uit de array
-            kogelX.splice(o,1); // verwijder kogel uit de array
+            kogelX.splice(o,1); // verwijder kogel uit de array        
             score = score + 1;
                 if (i >= 10){
                 i = 0;
@@ -206,11 +203,11 @@ var checkVijandGeraakt = function() {
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
     for (var i = 0; i < vijandX.length; i++) {
-        if(( abs(spelerX - vijandX[i]) < 30) && (spelerY < vijandY[i]) || (abs(vijandY[i]) > 671)) {
-        levens = levens - 1; 
-        vijandY[i] = random (-50, -300); 
-        vijandX[i] = random (60, 1200);
-        } 
+        if(( abs((spelerX - 30) - vijandX[i]) < 60) && ((spelerY - 15) < vijandY[i]) || (abs(vijandY[i]) > 671)) {
+            levens = levens - 1;
+            vijandX[i] = random(-10, -500);
+            vijandY[i] = random(-10, 1200);
+        }
     }
   return false;
 };
