@@ -105,7 +105,9 @@ var tekenKogels = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogels = function() {
+    
     kogelTijd = kogelTijd + 1;
+
     if (mouseIsPressed) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
         kogelX.push(spelerX); // voeg kogel toe aan het einde van de array
         kogelY.push(spelerY); // voeg kogel toe aan het einde van de array
@@ -207,8 +209,8 @@ var checkSpelerGeraakt = function() {
     for (var i = 0; i < vijandX.length; i++) {
         if(( abs((spelerX - 30) - vijandX[i]) < 60) && ((spelerY - 15) < vijandY[i]) || (abs(vijandY[i]) > 720)) {
             levens = levens - 1;
-            vijandX[i] = random(-10, -500);
-            vijandY[i] = random(-10, 1200);
+            vijandX[i] = random(30, 1200);
+            vijandY[i] = random(-10, -500);
         }
     }
   return false;
