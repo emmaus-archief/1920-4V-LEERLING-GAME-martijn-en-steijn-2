@@ -33,8 +33,7 @@ let imgSpeler;
 let imgVijandS;
 let imgVijandM;
 
-var achtergrondGeluid = new Audio('Interstellar-Odyssey.mp3')
-var muziekAanwezig = 'geenMuziek';
+var achtergrondGeluid = new Audio('Interstellar-Odyssey.mp3');
 
 var sterrenX = [67, 160, 240, 368, 490, 500, 657, 753, 815, 956, 1034, 1110, 301, 134, 237, 543, 743, 154, 950, 1124, 40, 449, 756, 150];
 var sterrenY = [90, 200, 400, 500, 650, 700, 190, 506, 135, 9, 453, 309, 352, 639, 108, 371, 743, 209, 56, 680, 40, 147, 400, 360];
@@ -53,7 +52,7 @@ function preload() {
     imgSpeler = loadImage('speler.png');
     imgVijandS = loadImage('vijandSteijn.png');
     imgVijandM = loadImage('vijandMartijn.png');
-    achtergrondGeluid = loadSound('Intersyetllar-Odyssey.mp3')
+    achtergrondGeluid = loadSound('Intersyetllar-Odyssey.mp3');
 };
 
 var beginScherm = function(){
@@ -71,22 +70,7 @@ var beginScherm = function(){
     text("Druk op enter om te beginnen", 420, 500 );
     image(imgSpeler, 30, 250, 300, 300);
     image(imgSpeler, 950, 250, 300, 300);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    achtergrondGeluid.volume = 0.2;
-=======
->>>>>>> f86c204b0767bd86b08d17202ba2c87ea84b1e70
     achtergrondGeluid.play();
-=======
-
-    if(muziekAanwezig === 'geenMuziek'){
-        achtergrondGeluid.play();
-        muziekAanwezig = 'speelMuziek';
-    } else { 
-        achtergrondGeluid.pause();
-        muziekAanwezig = 'geenMuziek';
-    }
->>>>>>> 41e8f17508d774dab1b2b8571b28d37f17215586
 };
 
 
@@ -351,4 +335,4 @@ function draw() {
       }
       break;
   }
-};
+}
