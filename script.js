@@ -70,7 +70,10 @@ var beginScherm = function(){
     text("Druk op enter om te beginnen", 420, 500 );
     image(imgSpeler, 30, 250, 300, 300);
     image(imgSpeler, 950, 250, 300, 300);
+<<<<<<< HEAD
     achtergrondGeluid.volume = 0.2;
+=======
+>>>>>>> f86c204b0767bd86b08d17202ba2c87ea84b1e70
     achtergrondGeluid.play();
 };
 
@@ -118,7 +121,6 @@ var tekenAlleVijanden = function() {
     for (var i=0; i < vijandXS.length; i++) {
     image(imgVijandS, vijandXS[i]-9, vijandYS[i]-9, 100, 100);
     image(imgVijandM, vijandXM[i]-60, vijandYM[i]-30, 100, 100);
-    triangle(vijandXM[i]-30, vijandYM[i]-15, vijandXM[i], vijandYM[i]+15, vijandXM[i]+30, vijandYM[i]-15);
     }
 };
 
@@ -216,9 +218,9 @@ if(mouseY >= 685){
 var checkVijandGeraakt = function() {
     for (var i = 0; i < vijandXS.length; i++) {
         for(var o = 0; o < kogelX.length; o++){
-            if (( abs(kogelY[o] - (vijandYS[i] + 15)) < 30) && (abs((vijandXS[i] + 50) - kogelX[o]) < 20)){
+            if (( abs(kogelY[o] - (vijandYS[i] + 15)) < 30) && (abs((vijandXS[i] + 40) - kogelX[o]) < 20)){
             vijandYS[i] = random(-30, -300);
-            vijandXS[i] = random(30, 1230);
+            vijandXS[i] = random(30, 1200);
 
             kogelY.splice(o,1); // verwijder kogel uit de array
             kogelX.splice(o,1); // verwijder kogel uit de array        
@@ -233,7 +235,7 @@ var checkVijandGeraakt = function() {
         for(var o = 0; o < kogelX.length; o++){
             if (( abs(kogelY[o] - (vijandYM[i] + 15)) < 30) && (abs((vijandXM[i] ) - kogelX[o]) < 40)){
             vijandYM[i] = random(-30, -300);
-            vijandXM[i] = random(30, 1230);
+            vijandXM[i] = random(30, 1200);
 
             kogelY.splice(o,1); // verwijder kogel uit de array
             kogelX.splice(o,1); // verwijder kogel uit de array        
