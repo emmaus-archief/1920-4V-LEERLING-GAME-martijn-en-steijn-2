@@ -20,7 +20,7 @@
 const UITLEG = 0;
 const SPELEN = 1;
 const GAMEOVER = 2;
-var spelStatus = UITLEG;
+var spelStatus = UITLEG ;
 
 var spelerX = 0; // x-positie van speler
 var spelerY = 0; // y-positie van speler
@@ -65,6 +65,8 @@ var beginScherm = function(){
     text("De muis om te bewegen", 460, 350);
     text("De linkermuisknop om te schieten", 400, 400);
     text("Druk op enter om te beginnen", 420, 500 );
+    image(imgSpeler, 30, 250, 300, 300);
+    image(imgSpeler, 950, 250, 300, 300);
 };
 
 
@@ -77,6 +79,8 @@ var tekenEindScherm = function() {
     textSize (30);
     text ("Score: " + score, 550, 300);
     text ("Druk spatie om naar het beginscherm te gaan", 340 , 500);
+    image(imgVijandS, 30, 250, 300, 300);
+    image(imgVijandM, 950, 270, 300, 300);
 };
 
 /* ********************************************* */
