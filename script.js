@@ -136,12 +136,12 @@ fill(0, 0, 0);
 var beweegAlleVijanden = function() {
     for (var i=0; i < vijandX.length; i++) {
      vijandY[i] += 3;
-        }
-        if (vijandY[i] === 670){
+    }
+    if (vijandY[i] === 670){
             vijandY[i] = random(-10, -160);
             vijandX[i] = random(60, 1200);
-        }
-    };
+    }
+};
 
 /**
  * Kijkt wat de toetsen/muis etc zijn.
@@ -158,7 +158,7 @@ if(mouseX <= 50){
           spelerX = 1230;  
     } else { 
           spelerX = mouseX;
-        }
+    }
 
 if(mouseY >= 685){
        spelerY = 685;  
