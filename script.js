@@ -226,7 +226,7 @@ var checkSpelerGeraakt = function() {
         if(( abs((spelerX - 30) - vijandX[i]) < 60) && ((spelerY - 15) < vijandY[i]) || (abs(vijandY[i]) > 671)) {
             levens = levens - 1;
             vijandX[i] = random(-10, -500);
-            vijandY[i] = random(-10, -500);
+            vijandY[i] = random(-10, 1200);
         }
     }
   return false;
