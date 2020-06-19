@@ -104,9 +104,15 @@ var tekenKogels = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogels = function() {
-    if (mouseIsPressed) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
-        kogelX.push(spelerX); // voeg kogel toe aan het einde van de array
-        kogelY.push(spelerY); // voeg kogel toe aan het einde van de array
+var kogelTijd = 0;
+
+    if (mouseClicked) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
+        kogelTijd = kogelTijd + 1;
+        if (kogelTijd === 150){
+            kogelX.push(spelerX); // voeg kogel toe aan het einde van de array
+            kogelY.push(spelerY); // voeg kogel toe aan het einde van de array
+            kogelTijd = 0;
+        }
     }
     for(var o = 0; o < kogelX.length; o++){
         if (kogelY[o] < 30) {
@@ -116,7 +122,7 @@ var beweegKogels = function() {
             kogelY[o] = kogelY[o] - 8;
         }
     }
-};*/
+};
 
 /**
  * Tekent de speler
