@@ -108,9 +108,10 @@ var beweegKogels = function() {
     
     kogelTijd = kogelTijd + 1;
 
-    if (mouseIsPressed) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
+    if ((mouseIsPressed) && (kogelTijd >= 30)) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
         kogelX.push(spelerX); // voeg kogel toe aan het einde van de array
         kogelY.push(spelerY); // voeg kogel toe aan het einde van de array
+        kogelTijd = 0;
     }
     for(var o = 0; o < kogelX.length; o++){
         if (kogelY[o] < 30) {
@@ -215,10 +216,6 @@ var checkSpelerGeraakt = function() {
     }
   return false;
 };
-
-
-
-
 
 /**
  * setup
