@@ -114,7 +114,7 @@ var beweegKogels = function() {
         kogelTijd = 0;
     }
     for(var o = 0; o < kogelX.length; o++){
-        if (kogelY[o] < 30) {
+        if (kogelY[o] < 25) {
             kogelY.splice(o,1); // verwijder kogel uit de array
             kogelX.splice(o,1); // verwijder kogel uit de array
         } else {
