@@ -31,7 +31,7 @@ var aanwezigKogel = false;
 variabele triangle vijand
 */
 var vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
-var vijandY = [90, -200, -400, -500, -650, -700]; // y-positie vijand
+var vijandY = [-90, -200, -400, -500, -650, -700]; // y-positie vijand
 //var vijandWachtTijd = 100; //aantal 50e van een seconde 
 
 
@@ -87,22 +87,16 @@ var tekenVeld = function () {
 var tekenAlleVijanden = function() {
     noStroke();
     fill(255,0,0);
-<<<<<<< HEAD
     for (var i=0; i < vijandX.length; i++) {
      triangle (vijandX[i], vijandY[i], vijandX[i] + 60, vijandY[i], vijandX[i] + 30, vijandY[i] + 30);
     }
-=======
-     triangle (x, y, x + 60, y, x + 30, y + 30);
->>>>>>> ee3190ad40d3becedc5c715b451aac1baf66f125
 };
 
 //tekent de kogels    
 var tekenKogels = function() {
     fill(255, 0, 0);
-    for(var o=0; o < 3; o++){
-        if (aanwezigKogel === true){
-            ellipse (kogelX[o], kogelY[o], 5, 15);
-        }
+    for(var o = 0; o < kogelX.length; o++){ // Voor o < vijandX.length oneindig veel kogels??
+        ellipse (kogelX[o], kogelY[o], 5, 15);
     }    
 };
     
@@ -111,10 +105,28 @@ var tekenKogels = function() {
  */
 var beweegKogels = function() {
     for(var o = 0; o < 3; o++){
+        if (mouseIsPressed) {
+            //kogelY[o] = spelerY; kan weg??
+            //kogelX[o] = spelerX; kan weg??
+            kogelX.push(spelerX);
+            kogelY.push(spelerY);
+        }
+        if (kogelY[o] < 30) {
+            kogelY.splice(o, 1);
+            kogelX.splice(o, 1);
+           // aanwezigKogel = false;
+        } else {
+            kogelY[o] = kogelY[o] - 8;
+        }
+    }
+};
+
+/*var beweegKogels = function() {
+    for(var o = 0; o < 3; o++){
         if ((aanwezigKogel === false) && (mouseIsPressed)) {
-            aanwezigKogel[o] = true;
-            kogelY[o] = spelerY; 
-            kogelX[o] = spelerX; 
+            //aanwezigKogel[o] = true;
+            //kogelY[o] = spelerY; kan weg??
+            //kogelX[o] = spelerX; kan weg??
             kogelX.push(spelerX);
             kogelY.push(spelerY);
         }
@@ -125,7 +137,7 @@ var beweegKogels = function() {
             kogelY[o] = kogelY[o] - 8;
         }
     }
-};
+};*/
 
 /**
  * Tekent de speler
@@ -136,8 +148,6 @@ var tekenSpeler = function(x, y) {
     
 fill(0, 0, 0);
   triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
-
-   
 };
 
 
@@ -187,27 +197,19 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-<<<<<<< HEAD
     for (var i = 0; i < vijandX.length; i++) {
-        for(var o = 0; o < kogelX.length; o++){
-            //rect(vijandX[0], vijandY[0], 30, 50);
-            if (( abs(kogelY[o] - vijandY[i]) < 30) && (abs(vijandX[i] - kogelX[o]) < 50)){
+        for(var o = 0; o < 3; o++){
+            if (( abs(kogelY[o] - (vijandY[i] + 15)) < 30) && (abs((vijandX[i] + 30) - kogelX[o]) < 40)){
             vijandY[i] = random(-30, -300);
             vijandX[i] = random(30, 1230);
-            aanwezigKogel = false;
+            kogelY.splice(o, 1);
+            kogelX.splice(o, 1);
             score = score + 1;
                 if (i >= 10){
                 i = 0;
                 }
             }      
         }
-=======
-    if ((abs(kogelY - (vijandY + 15)) < 30) && (abs((vijandX + 30) - kogelX) < 40)){
-        vijandY = random(-30, -130);
-        vijandX = random(30, 1250);
-        aanwezigKogel = false;
-        score = score + 1;
->>>>>>> ee3190ad40d3becedc5c715b451aac1baf66f125
     }
   return false;
 };
@@ -220,16 +222,12 @@ var checkVijandGeraakt = function() {
  */
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
-<<<<<<< HEAD
     for (var i = 0; i < vijandX.length; i++) {
-        if(( abs(spelerX - vijandX[i]) < 30) && (spelerY < vijandY[i]) || (abs(vijandY[i]) > 671)) {
-=======
-    if(( abs((spelerX - 30) - vijandX) < 60) && ((spelerY - 15) <= vijandY) || (abs(vijandY) > 671)) {
->>>>>>> ee3190ad40d3becedc5c715b451aac1baf66f125
-        levens = levens - 1; 
-        vijandY[i] = random (-50, -300); 
-        vijandX[i] = random (60, 1200);
-        } 
+        if(( abs((spelerX - 30) - vijandX[i]) < 60) && ((spelerY - 15) < vijandY[i]) || (abs(vijandY[i]) > 671)) {
+            levens = levens - 1;
+            vijandX[i] = random(-10, -500);
+            vijandY[i] = random(-10, -500);
+        }
     }
   return false;
 };
