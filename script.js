@@ -143,7 +143,7 @@ var beweegKogels = function() {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-     image(imgSpeler, mouseX-30, mouseY-25, 60, 60);
+     image(imgSpeler, x-30, y-25, 60, 60);
 fill(255, 255, 255);
   //triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
 };
