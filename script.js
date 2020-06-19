@@ -73,9 +73,9 @@ var tekenEindScherm = function() {
  * Tekent het speelveld
  */
 var tekenVeld = function () {
-  fill(135, 206, 235);
+  fill(0, 0, 0);
   rect(0, 0, 1280, 1280);
-  fill(0,0,0);
+  fill(255,255,255);
   text("Levens: " + levens, 50, 50);
   console.log("tekenVeld");
   text("Score: " + score, 150, 50);  
@@ -95,7 +95,7 @@ var tekenAlleVijanden = function() {
 
 //tekent de kogels    
 var tekenKogels = function() {
-    fill(255, 0, 0);
+    fill('blue');
       for(var o = 0; o < kogelX.length; o++){ // Voor o < vijandX.length oneindig veel kogels??
         ellipse (kogelX[o], kogelY[o], 5, 15);
     }    
@@ -130,7 +130,7 @@ var beweegKogels = function() {
  */
 var tekenSpeler = function(x, y) {
     
-fill(0, 0, 0);
+fill(255, 255, 255);
   triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
 };
 
