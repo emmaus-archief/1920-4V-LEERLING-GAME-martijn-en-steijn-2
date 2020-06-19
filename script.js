@@ -108,7 +108,8 @@ var tekenAlleVijanden = function() {
     fill(128,0,0);
     for (var i=0; i < vijandXS.length; i++) {
     image(imgVijandS, vijandXS[i]-9, vijandYS[i]-9, 100, 100);
-    image(imgVijandM, vijandXM[i]-9, vijandYM[i]-9, 100, 100);
+    image(imgVijandM, vijandXM[i]-60, vijandYM[i]-30, 100, 100);
+    triangle(vijandXM[i]-30, vijandYM[i]-15, vijandXM[i], vijandYM[i]+15, vijandXM[i]+30, vijandYM[i]-15);
     }
 };
 
@@ -316,7 +317,7 @@ function draw() {
       tekenKogels();
       tekenSpeler(spelerX, spelerY);
 
-      if (levens === 0) {
+      if (levens <= 0) {
         spelStatus = GAMEOVER;
       }
       break;
