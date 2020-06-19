@@ -30,22 +30,26 @@ var kogelY = [];    // y-positie van kogel
 var kogelTijd = 0; // tijd tussen kogels
 
 let imgSpeler;
+let imgVijandS;
+let imgVijandM;
 
 var sterrenX = [67, 160, 240, 368, 490, 500, 657, 753, 815, 956, 1034, 1110, 301, 134, 237, 543, 743, 154, 950, 1124, 40, 449, 756, 150];
 var sterrenY = [90, 200, 400, 500, 650, 700, 190, 506, 135, 9, 453, 309, 352, 639, 108, 371, 743, 209, 56, 680, 40, 147, 400, 360];
 /* 
 variabele triangle vijand
 */
-var vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
-var vijandY = [-90, -200, -400, -500, -650, -700]; // y-positie vijand
-//var vijandWachtTijd = 100; //aantal 50e van een seconde 
-
+var vijandXS = [67, 160, 240]; // x-positie vijand
+var vijandYS = [-90, -200, -400]; // y-positie vijand
+var vijandXM = [368, 490, 500]; // x-positie vijand
+var vijandYM = [-500, -650, -700];
 
 var score = 0; // aantal behaalde punten
 var levens = 3; //aantal levens
 
 function preload() {
-    imgSpeler = loadImage('pixil-layer-Layer 1.png');
+    imgSpeler = loadImage('speler.png');
+    imgVijandS = loadImage('vijandSteijn.png');
+    imgVijandM = loadImage('vijandMartijn.png');
 };
 
 var beginScherm = function(){
@@ -102,15 +106,16 @@ var tekenVeld = function () {
 var tekenAlleVijanden = function() {
     noStroke();
     fill(128,0,0);
-    for (var i=0; i < vijandX.length; i++) {
-     triangle (vijandX[i], vijandY[i], vijandX[i] + 60, vijandY[i], vijandX[i] + 30, vijandY[i] + 30);
+    for (var i=0; i < vijandXS.length; i++) {
+    image(imgVijandS, vijandXS[i]-9, vijandYS[i]-9, 100, 100);
+    image(imgVijandM, vijandXM[i]-9, vijandYM[i]-9, 100, 100);
     }
 };
 
 //tekent de kogels    
 var tekenKogels = function() {
     fill('blue');
-      for(var o = 0; o < kogelX.length; o++){ // Voor o < vijandX.length oneindig veel kogels??
+      for(var o = 0; o < kogelX.length; o++){ 
         ellipse (kogelX[o], kogelY[o], 5, 15);
     }    
 };
@@ -143,9 +148,8 @@ var beweegKogels = function() {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-     image(imgSpeler, x-30, y-25, 60, 60);
+    image(imgSpeler, x-30, y-25, 60, 60);
 fill(255, 255, 255);
-  //triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
 };
 
 
@@ -153,12 +157,17 @@ fill(255, 255, 255);
  * Updatet globale variabelen met positie van vijand of tegenspeler
  */
 var beweegAlleVijanden = function() {
-    for (var i=0; i < vijandX.length; i++) {
-     vijandY[i] += 3;
+    for (var i=0; i < vijandXS.length; i++) {
+     vijandYS[i] += 3;
+     vijandYM[i] += 2;
         }
-        if (vijandY[i] === 670){
-            vijandY[i] = random(-10, -160);
-            vijandX[i] = random(60, 1200);
+        if (vijandYS[i] === 670){
+            vijandYS[i] = random(-10, -160);
+            vijandXS[i] = random(60, 1200);
+        }
+        if (vijandYM[i] === 670){
+            vijandYM[i] = random(-10, -160);
+            vijandXM[i] = random(60, 1200);
         }
     };
 
@@ -195,11 +204,26 @@ if(mouseY >= 685){
  * @returns {boolean} true als vijand is geraakt
  */
 var checkVijandGeraakt = function() {
-    for (var i = 0; i < vijandX.length; i++) {
+    for (var i = 0; i < vijandXS.length; i++) {
         for(var o = 0; o < kogelX.length; o++){
-            if (( abs(kogelY[o] - (vijandY[i] + 15)) < 30) && (abs((vijandX[i] + 30) - kogelX[o]) < 40)){
-            vijandY[i] = random(-30, -300);
-            vijandX[i] = random(30, 1230);
+            if (( abs(kogelY[o] - (vijandYS[i] + 15)) < 30) && (abs((vijandXS[i] + 30) - kogelX[o]) < 40)){
+            vijandYS[i] = random(-30, -300);
+            vijandXS[i] = random(30, 1230);
+
+            kogelY.splice(o,1); // verwijder kogel uit de array
+            kogelX.splice(o,1); // verwijder kogel uit de array        
+            score = score + 1;
+                if (i >= 10){
+                i = 0;
+                }
+            }      
+        }
+    }
+    for (var i = 0; i < vijandXM.length; i++) {
+        for(var o = 0; o < kogelX.length; o++){
+            if (( abs(kogelY[o] - (vijandYM[i] + 15)) < 30) && (abs((vijandXM[i] + 30) - kogelX[o]) < 40)){
+            vijandYM[i] = random(-30, -300);
+            vijandXM[i] = random(30, 1230);
 
             kogelY.splice(o,1); // verwijder kogel uit de array
             kogelX.splice(o,1); // verwijder kogel uit de array        
@@ -213,7 +237,6 @@ var checkVijandGeraakt = function() {
   return false;
 };
 
-
 /**
  * Zoekt uit of de speler is geraakt
  * bijvoorbeeld door botsing met vijand
@@ -221,11 +244,18 @@ var checkVijandGeraakt = function() {
  */
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
-    for (var i = 0; i < vijandX.length; i++) {
-        if(( abs((spelerX - 30) - vijandX[i]) < 60) && ((spelerY - 15) < vijandY[i]) || (abs(vijandY[i]) > 720)) {
+    for (var i = 0; i < vijandXS.length; i++) {
+        if(( abs((spelerX - 30) - vijandXS[i]) < 60) && ((spelerY - 15) < vijandYS[i]) || (abs(vijandYS[i]) > 720)) {
             levens = levens - 1;
-            vijandX[i] = random(30, 1200);
-            vijandY[i] = random(-10, -500);
+            vijandXS[i] = random(30, 1200);
+            vijandYS[i] = random(-10, -500);
+        }
+    }
+    for (var i = 0; i < vijandXM.length; i++) {
+        if(( abs((spelerX - 30) - vijandXM[i]) < 60) && ((spelerY - 15) < vijandYM[i]) || (abs(vijandYM[i]) > 720)) {
+            levens = levens - 1;
+            vijandXM[i] = random(30, 1200);
+            vijandYM[i] = random(-10, -500);
         }
     }
   return false;
@@ -260,8 +290,10 @@ function draw() {
         textSize(20);
         levens = 3;
         score = 0;
-    vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
-    vijandY = [-90, -200, -400, -500, -650, -700]; // y-positie vijand
+        vijandXS = [67, 160, 240]; // x-positie vijand
+        vijandYS = [-90, -200, -400]; // y-positie vijand
+        vijandXM = [368, 490, 500]; // x-positie vijand
+        vijandYM = [-500, -650, -700];
     }
     break;  
     case SPELEN:
@@ -284,7 +316,7 @@ function draw() {
       tekenKogels();
       tekenSpeler(spelerX, spelerY);
 
-      if (levens <= 0) {
+      if (levens === 0) {
         spelStatus = GAMEOVER;
       }
       break;
