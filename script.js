@@ -33,7 +33,8 @@ let imgSpeler;
 let imgVijandS;
 let imgVijandM;
 
-var achtergrondGeluid = new Audio('Interstellar-Odyssey.mp3');
+var achtergrondGeluid = new Audio('Interstellar-Odyssey.mp3')
+var muziekAanwezig = 'geenMuziek';
 
 var sterrenX = [67, 160, 240, 368, 490, 500, 657, 753, 815, 956, 1034, 1110, 301, 134, 237, 543, 743, 154, 950, 1124, 40, 449, 756, 150];
 var sterrenY = [90, 200, 400, 500, 650, 700, 190, 506, 135, 9, 453, 309, 352, 639, 108, 371, 743, 209, 56, 680, 40, 147, 400, 360];
@@ -70,7 +71,14 @@ var beginScherm = function(){
     text("Druk op enter om te beginnen", 420, 500 );
     image(imgSpeler, 30, 250, 300, 300);
     image(imgSpeler, 950, 250, 300, 300);
-    achtergrondGeluid.play();
+
+    if(muziekAanwezig === 'geenMuziek'){
+        achtergrondGeluid.play();
+        muziekAanwezig = 'speelMuziek';
+    } else { 
+        achtergrondGeluid.pause();
+        muziekAanwezig = 'geenMuziek';
+    }
 };
 
 
