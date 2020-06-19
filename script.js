@@ -249,6 +249,8 @@ function draw() {
         textSize(20);
         levens = 3;
         score = 0;
+    vijandX = [67, 160, 240, 368, 490, 500]; // x-positie vijand
+    vijandY = [-90, -200, -400, -500, -650, -700]; // y-positie vijand
     }
     break;  
     case SPELEN:
