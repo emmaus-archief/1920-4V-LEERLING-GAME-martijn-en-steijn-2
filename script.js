@@ -222,7 +222,7 @@ var checkVijandGeraakt = function() {
     }
     for (var i = 0; i < vijandXM.length; i++) {
         for(var o = 0; o < kogelX.length; o++){
-            if (( abs(kogelY[o] - (vijandYM[i] + 15)) < 30) && (abs((vijandXM[i] + 30) - kogelX[o]) < 40)){
+            if (( abs(kogelY[o] - (vijandYM[i] + 15)) < 30) && (abs((vijandXM[i] ) - kogelX[o]) < 40)){
             vijandYM[i] = random(-30, -300);
             vijandXM[i] = random(30, 1230);
 
