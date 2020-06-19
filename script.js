@@ -26,6 +26,7 @@ var spelerY = 0; // y-positie van speler
 
 var kogelX = [];    // x-positie van kogel
 var kogelY = [];    // y-positie van kogel
+var kogelTijd = 0; // tijd tussen kogels
 
 /* 
 variabele triangle vijand
@@ -104,6 +105,7 @@ var tekenKogels = function() {
  * Updatet globale variabelen met positie van kogel of bal
  */
 var beweegKogels = function() {
+    kogelTijd = kogelTijd + 1;
     if (mouseIsPressed) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
         kogelX.push(spelerX); // voeg kogel toe aan het einde van de array
         kogelY.push(spelerY); // voeg kogel toe aan het einde van de array
@@ -136,12 +138,12 @@ fill(0, 0, 0);
 var beweegAlleVijanden = function() {
     for (var i=0; i < vijandX.length; i++) {
      vijandY[i] += 3;
-    }
-    if (vijandY[i] === 670){
+        }
+        if (vijandY[i] === 670){
             vijandY[i] = random(-10, -160);
             vijandX[i] = random(60, 1200);
-    }
-};
+        }
+    };
 
 /**
  * Kijkt wat de toetsen/muis etc zijn.
@@ -158,7 +160,7 @@ if(mouseX <= 50){
           spelerX = 1230;  
     } else { 
           spelerX = mouseX;
-    }
+        }
 
 if(mouseY >= 685){
        spelerY = 685;  
@@ -177,7 +179,7 @@ if(mouseY >= 685){
  */
 var checkVijandGeraakt = function() {
     for (var i = 0; i < vijandX.length; i++) {
-        for(var o = 0; o < 3; o++){
+        for(var o = 0; o < kogelX.length; o++){
             if (( abs(kogelY[o] - (vijandY[i] + 15)) < 30) && (abs((vijandX[i] + 30) - kogelX[o]) < 40)){
             vijandY[i] = random(-30, -300);
             vijandX[i] = random(30, 1230);
@@ -203,7 +205,7 @@ var checkVijandGeraakt = function() {
 var checkSpelerGeraakt = function() {
     console.log("checkSpelerGeraakt: levens =",levens);
     for (var i = 0; i < vijandX.length; i++) {
-        if(( abs((spelerX - 30) - vijandX[i]) < 60) && ((spelerY - 15) < vijandY[i]) || (abs(vijandY[i]) > 671)) {
+        if(( abs((spelerX - 30) - vijandX[i]) < 60) && ((spelerY - 15) < vijandY[i]) || (abs(vijandY[i]) > 720)) {
             levens = levens - 1;
             vijandX[i] = random(-10, -500);
             vijandY[i] = random(-10, 1200);
