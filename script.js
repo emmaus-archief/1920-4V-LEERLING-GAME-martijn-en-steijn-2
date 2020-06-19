@@ -108,7 +108,7 @@ var beweegKogels = function() {
     
     kogelTijd = kogelTijd + 1;
 
-    if ((mouseIsPressed) && (kogelTijd >= 30)) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
+    if ((mouseIsPressed) && (kogelTijd >= 25)) { // LETOP: als je de muis continue indrukt, dan komen er 50 kogels per seconde bij
         kogelX.push(spelerX); // voeg kogel toe aan het einde van de array
         kogelY.push(spelerY); // voeg kogel toe aan het einde van de array
         kogelTijd = 0;
@@ -157,18 +157,18 @@ var beweegSpeler = function() {
     spelerY = mouseY;
     spelerX = mouseX;
 
-if(mouseX <= 50){
-      spelerX = 50;
-    } else if(mouseX >= 1230){
-          spelerX = 1230;  
+if(mouseX <= 30){
+      spelerX = 30;
+    } else if(mouseX >= 1250){
+          spelerX = 1250;  
     } else { 
           spelerX = mouseX;
         }
 
 if(mouseY >= 685){
        spelerY = 685;  
-    } else if(mouseY <= 500){
-       spelerY = 500;
+    } else if(mouseY <= 15){
+       spelerY = 15;
     } else { 
         spelerY= mouseY;
     }   
