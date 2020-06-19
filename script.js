@@ -33,6 +33,8 @@ let imgSpeler;
 let imgVijandS;
 let imgVijandM;
 
+var achtergrondGeluid = new Audio('Interstellar-Odyssey.mp3');
+
 var sterrenX = [67, 160, 240, 368, 490, 500, 657, 753, 815, 956, 1034, 1110, 301, 134, 237, 543, 743, 154, 950, 1124, 40, 449, 756, 150];
 var sterrenY = [90, 200, 400, 500, 650, 700, 190, 506, 135, 9, 453, 309, 352, 639, 108, 371, 743, 209, 56, 680, 40, 147, 400, 360];
 /* 
@@ -50,6 +52,7 @@ function preload() {
     imgSpeler = loadImage('speler.png');
     imgVijandS = loadImage('vijandSteijn.png');
     imgVijandM = loadImage('vijandMartijn.png');
+    achtergrondGeluid = loadSound('Intersyetllar-Odyssey.mp3')
 };
 
 var beginScherm = function(){
@@ -65,8 +68,12 @@ var beginScherm = function(){
     text("De muis om te bewegen", 460, 350);
     text("De linkermuisknop om te schieten", 400, 400);
     text("Druk op enter om te beginnen", 420, 500 );
+<<<<<<< HEAD
     image(imgSpeler, 30, 250, 300, 300);
     image(imgSpeler, 950, 250, 300, 300);
+=======
+    achtergrondGeluid.play();
+>>>>>>> bb8efc9ee96ccfe32746e2b990e9ddf620f579e1
 };
 
 
