@@ -68,12 +68,10 @@ var beginScherm = function(){
     text("De muis om te bewegen", 460, 350);
     text("De linkermuisknop om te schieten", 400, 400);
     text("Druk op enter om te beginnen", 420, 500 );
-<<<<<<< HEAD
     image(imgSpeler, 30, 250, 300, 300);
     image(imgSpeler, 950, 250, 300, 300);
-=======
+    achtergrondGeluid.volume = 0.2;
     achtergrondGeluid.play();
->>>>>>> bb8efc9ee96ccfe32746e2b990e9ddf620f579e1
 };
 
 
@@ -339,4 +337,4 @@ function draw() {
       }
       break;
   }
-}
+};
