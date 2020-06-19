@@ -46,8 +46,10 @@ var beginScherm = function(){
     rect(0, 0, 1280, 720);
     fill(255,255,255);
     textSize(50);
+    fill(128, 0, 0);
     text("Ruimte Kapers", 460, 100);
     textSize(30);
+    fill('white')
     text("Benodigde toetsen:", 490, 300);
     text("De muis om te bewegen", 460, 350);
     text("De linkermuisknop om te schieten", 400, 400);
@@ -92,7 +94,7 @@ var tekenVeld = function () {
  */
 var tekenAlleVijanden = function() {
     noStroke();
-    fill(255,0,0);
+    fill(128,0,0);
     for (var i=0; i < vijandX.length; i++) {
      triangle (vijandX[i], vijandY[i], vijandX[i] + 60, vijandY[i], vijandX[i] + 30, vijandY[i] + 30);
     }
