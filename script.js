@@ -1,4 +1,5 @@
-/// @ts-check
+// @ts-nocheck
+
 /// <reference path=".gitpod/p5.global-mode.d.ts" />
 "use strict";
 
@@ -28,6 +29,8 @@ var kogelX = [];    // x-positie van kogel
 var kogelY = [];    // y-positie van kogel
 var kogelTijd = 0; // tijd tussen kogels
 
+let imgSpeler;
+
 var sterrenX = [67, 160, 240, 368, 490, 500, 657, 753, 815, 956, 1034, 1110, 301, 134, 237, 543, 743, 154, 950, 1124, 40, 449, 756, 150];
 var sterrenY = [90, 200, 400, 500, 650, 700, 190, 506, 135, 9, 453, 309, 352, 639, 108, 371, 743, 209, 56, 680, 40, 147, 400, 360];
 /* 
@@ -41,6 +44,10 @@ var vijandY = [-90, -200, -400, -500, -650, -700]; // y-positie vijand
 var score = 0; // aantal behaalde punten
 var levens = 3; //aantal levens
 
+function preload() {
+    imgSpeler = loadImage('pixil-layer-Layer 1.png');
+};
+
 var beginScherm = function(){
     fill(0,0,0);
     rect(0, 0, 1280, 720);
@@ -53,8 +60,8 @@ var beginScherm = function(){
     text("Benodigde toetsen:", 490, 300);
     text("De muis om te bewegen", 460, 350);
     text("De linkermuisknop om te schieten", 400, 400);
-    text("Druk op enter om te beginnen", 420, 500 )
-}
+    text("Druk op enter om te beginnen", 420, 500 );
+};
 
 
 var tekenEindScherm = function() {
@@ -136,9 +143,9 @@ var beweegKogels = function() {
  * @param {number} y y-coördinaat
  */
 var tekenSpeler = function(x, y) {
-    
+     image(imgSpeler, mouseX-30, mouseY-25, 60, 60);
 fill(255, 255, 255);
-  triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
+  //triangle(x - 30, y + 15, x, y - 15, x + 30, y + 15);
 };
 
 
