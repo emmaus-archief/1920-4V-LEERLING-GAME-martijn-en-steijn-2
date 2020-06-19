@@ -28,6 +28,8 @@ var kogelX = [];    // x-positie van kogel
 var kogelY = [];    // y-positie van kogel
 var kogelTijd = 0; // tijd tussen kogels
 
+var sterrenX = [67, 160, 240, 368, 490, 500, 657, 753, 815, 956, 1034, 1110, 301, 134, 237, 543, 743, 154, 950, 1124, 40, 449, 756, 150];
+var sterrenY = [90, 200, 400, 500, 650, 700, 190, 506, 135, 9, 453, 309, 352, 639, 108, 371, 743, 209, 56, 680, 40, 147, 400, 360];
 /* 
 variabele triangle vijand
 */
@@ -73,12 +75,15 @@ var tekenEindScherm = function() {
  * Tekent het speelveld
  */
 var tekenVeld = function () {
-  fill(0, 0, 0);
-  rect(0, 0, 1280, 1280);
-  fill(255,255,255);
-  text("Levens: " + levens, 50, 50);
-  console.log("tekenVeld");
-  text("Score: " + score, 150, 50);  
+    fill(0, 0, 0);
+    rect(0, 0, 1280, 1280);
+    fill(255,255,255);
+    text("Levens: " + levens, 50, 50);
+    console.log("tekenVeld");
+    text("Score: " + score, 150, 50);  
+    for (var p=0; p < sterrenX.length; p++) {
+    rect(sterrenX[p], sterrenY[p], 5, 5);
+    }
 };
 
 
