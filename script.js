@@ -207,7 +207,7 @@ if(mouseY >= 685){
 var checkVijandGeraakt = function() {
     for (var i = 0; i < vijandXS.length; i++) {
         for(var o = 0; o < kogelX.length; o++){
-            if (( abs(kogelY[o] - (vijandYS[i] + 15)) < 30) && (abs((vijandXS[i] + 30) - kogelX[o]) < 40)){
+            if (( abs(kogelY[o] - (vijandYS[i] + 15)) < 30) && (abs((vijandXS[i] + 50) - kogelX[o]) < 20)){
             vijandYS[i] = random(-30, -300);
             vijandXS[i] = random(30, 1230);
 
