@@ -70,6 +70,8 @@ var beginScherm = function(){
     text("Druk op enter om te beginnen", 420, 500 );
     image(imgSpeler, 30, 250, 300, 300);
     image(imgSpeler, 950, 250, 300, 300);
+
+    achtergrondGeluid.volume = 0.2;
     achtergrondGeluid.play();
 };
 
